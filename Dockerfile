@@ -1,8 +1,9 @@
 FROM node:latest as build
 RUN mkdir /app
 WORKDIR /app
-COPY . .
+COPY package.json .
 RUN npm install
+COPY . .
 RUN yarn build
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
