@@ -1,9 +1,9 @@
-FROM node as build
+FROM node:12 as build
 RUN mkdir /app
 WORKDIR /app
 COPY . .
 #RUN yarn upgrade
-RUN npm run build
+RUN yarn build
 # set up production environment
 # the base image for this is an alpine based nginx image
 FROM nginx:alpine
