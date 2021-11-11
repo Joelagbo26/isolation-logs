@@ -45,8 +45,9 @@ jobs:
         inlineScript: |
           az account set --subscription 11a3de11-9814-4ebd-8c31-3665a9ef4bfa
           az aks get-credentials --resource-group eshop-learn-rg --name eshop-learn-aks
+          kubectl apply -f deployment.yaml -n boutique-app
 
-    - uses: azure/setup-kubectl@v1
-    - name: kubectl deploy to cluster
-      run: |
-        kubectl apply -f deployment.yaml -n boutique-app
+    #- uses: azure/setup-kubectl@v1
+    #- name: kubectl deploy to cluster
+    #  run: |
+    #    kubectl apply -f deployment.yaml -n boutique-app
