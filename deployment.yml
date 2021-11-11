@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mycicd 
-          image: osygroup/craze:83
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/simplewhale:latest
           ports:
           - containerPort: 80
 
