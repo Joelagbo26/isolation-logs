@@ -32,8 +32,21 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
+      
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          az account set --subscription 11a3de11-9814-4ebd-8c31-3665a9ef4bfa
+          az aks get-credentials --resource-group eshop-learn-rg --name eshop-learn-aks
 
     - uses: azure/setup-kubectl@v1
     - name: kubectl deploy to cluster
       run: |
-        kubectl apply -f deployment.yaml -n boutique-app --kubeconfig ${{ secrets.AKS_KUBECONFIG }}
+        kubectl apply -f deployment.yaml -n boutique-app
