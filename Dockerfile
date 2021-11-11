@@ -1,8 +1,8 @@
-FROM node:alpine as build
+FROM node:latest as build
 RUN mkdir /app
 WORKDIR /app
 COPY . .
-RUN yarn upgrade
+RUN npm install
 RUN yarn build
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
