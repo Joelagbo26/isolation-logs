@@ -3,7 +3,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . .
 #RUN yarn upgrade
-RUN yarn build
+RUN npm run build
 # set up production environment
 # the base image for this is an alpine based nginx image
 FROM nginx:alpine
