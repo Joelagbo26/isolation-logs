@@ -1,0 +1,16 @@
+
+name: "Deploy app to my AKS cluster"
+on:
+  push:
+    # run on pushes to master
+    branches:
+      - master
+jobs:
+  push-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/setup-kubectl@v1
+    - name: kubectl deploy to cluster
+      run: |
+        kubectl apply -f ./release/kubernetes-manifests.yaml -n boutique-app --kubeconfig ${{ secrets.AKS_KUBECONFIG }}
